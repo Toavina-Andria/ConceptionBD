@@ -10,3 +10,10 @@ ORDER BY c.id;
 SELECT c.id AS id_commande, c.date, SUM(cd.quantité * cd.prix) AS montant_total
 FROM commande c JOIN commande_details cd ON c.id = cd.id_commande
 GROUP BY c.id, c.date ORDER BY c.id;
+
+--Étape 4 : Clients habitués
+SELECT 
+    cmd.id AS id_commande,
+    cmd.date,
+    COALESCE(cl.nom_client, 'null') AS client
+FROM commande cmd LEFT JOIN client cl ON cmd.id_client = cl.id ORDER BY cmd.id;
