@@ -5,3 +5,8 @@ SELECT nom_plat, prix_plat FROM plat ORDER BY prix_plat DESC;
 SELECT c.id AS id_categorie, c.nom_categorie, COUNT(p.id) AS nombre_de_plats FROM categorie_plat c
 LEFT JOIN plat p ON c.id = p.id_categorie GROUP BY c.id, c.nom_categorie
 ORDER BY c.id;
+
+--Étape 3 : Prix de commandes
+SELECT c.id AS id_commande, c.date, SUM(cd.quantité * cd.prix) AS montant_total
+FROM commande c JOIN commande_details cd ON c.id = cd.id_commande
+GROUP BY c.id, c.date ORDER BY c.id;
